@@ -1,0 +1,125 @@
+/* Stilurile generale */
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.banner {
+    width: 100%;
+    height: 200vh;
+    background-image: linear-gradient(rgba(155, 145, 145, 0.75), rgba(49, 47, 47, 0.75)), url(background/background.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.navbar {
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#cartImage {
+    cursor: pointer;
+    width: 30px; /* Ajustează dimensiunea imaginii după preferințele tale */
+    height: auto; /* Ajustează dimensiunea imaginii după preferințele tale */
+    margin-right: 20px; /* Ajustează spațiul dintre imagine și celelalte elemente, dacă este necesar */
+}
+.logo {
+    width: 120px;
+    cursor: pointer;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.navbar ul li {
+    margin-left: 60%;
+    position: relative;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.navbar ul li::after {
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #009688;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transition: 0.8s;
+}
+
+.navbar ul li:hover::after {
+    width: 100%;
+}
+
+.content {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #fff;
+}
+
+.content h1 {
+    font-size: 70px;
+    margin-top: 80px;
+}
+
+.content p {
+    margin: 20px auto;
+    font-weight: 100;
+    line-height: 25px;
+}
+
+
+/* Stilurile pentru modal */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

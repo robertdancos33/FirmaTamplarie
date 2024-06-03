@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Signup</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Welcome!</h2>
+        <div id="popup" style="display: none;">
+            <h2>Select Option</h2>
+            <button onclick="showLoginForm()">Login</button>
+            <button onclick="showSignupForm()">Signup</button>
+            <button onclick="hidePopup()">Close</button>
+        </div>
+        <button onclick="showPopup()"><img src="background/logo.png" style="width: 50%;" alt="Avatar"></button>
+        <div id="formContainer"></div>
+    </div>
+
+    <script>
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function hidePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        async function submitForm(action) {
+            const formData = new FormData(document.getElementById(action + 'Form'));
+            const formDataObj = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/' + action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formDataObj)
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                localStorage.setItem('token', data.token);
+                alert(action.charAt(0).toUpperCase() + action.slice(1) + ' successful!');
+                window.location.href = 'Interfata.html';
+            } else {
+                alert(data.message);
+            }
+        }
+
+        function showLoginForm() {
+            hidePopup();
+            document.getElementById('formContainer').innerHTML = `
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="submitForm('login'); return false;">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br><br>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <button type="submit">Login</button>
+            </form>
+        `;
+        }
+
+        function showSignupForm() {
+            hidePopup();
+            document.getElementById('formContainer').innerHTML = `
+            <h2>Signup</h2>
+            <form id="signupForm" onsubmit="submitForm('signup'); return false;">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br><br>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required><br><br
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <button type="submit">Signup</button>
+            </form>
+        `;
+        }
+    </script>
+</body>
+
+</html>
